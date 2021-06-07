@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel src -d build/js",
-    "watch": "babel src -d build/js -w"
+    "watch": "babel src -d build/js -w",
+    "webpack": "webpack --mode=development"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,8 @@
     "@babel/cli": "^7.14.3",
     "@babel/core": "^7.14.3",
     "@babel/preset-env": "^7.14.4",
-    "babel-preset-minify": "^0.5.1"
+    "babel-preset-minify": "^0.5.1",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.0"
   }
 }
