@@ -6,6 +6,7 @@
         // "modules": "umd"
         "modules": "cjs"
       }
-    ]
+    ],
+    "minify"
   ]
 }
