@@ -1,5 +1,9 @@
 
 import { test } from "./test"
+// import json from './json' // работает по умолчанию
+// import logo from './logo.png
+// import xml from './xml.xml
+import './styles/styles.css'
 
 class Paper {
   constructor(x) {
