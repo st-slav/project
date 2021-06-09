@@ -30,7 +30,7 @@ const optimization = () => {
 module.exports = {
   context: path.resolve(__dirname),
   entry: {
-    main: './src/index.js',
+    main: ['@babel/polyfill', './src/index.js'],
     worker: './src/worker.js'
   },
   output: {
@@ -89,6 +89,16 @@ module.exports = {
       {
         test: /\.csv$/,
         use: ['csv-loader']
+      },
+      {
+        test: /\.m?js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
       }
     ]
   }
