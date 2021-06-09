@@ -7,4 +7,5 @@ body {
 
 #root {
   background-image: url('../assets/full.png');
+  height: 100vh;
 }

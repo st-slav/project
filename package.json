@@ -8,7 +8,8 @@
     "build": "webpack src -d build/js",
     "watch": "babel src -d build/js -w",
     "webpack": "webpack --mode=development",
-    "webpack-watch": "webpack --mode=development --watch"
+    "webpack-watch": "webpack --mode=development --watch",
+    "start": "webpack server --mode development --open"
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,7 @@
     "style-loader": "^2.0.0",
     "webpack": "^5.38.1",
     "webpack-cli": "^4.7.0",
+    "webpack-dev-server": "^3.11.2",
     "xml-loader": "^1.2.1"
   },
   "dependencies": {
