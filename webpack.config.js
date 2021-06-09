@@ -1,4 +1,5 @@
 const path = require('path')
+const HTMLWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -6,7 +7,12 @@ module.exports = {
     worker: './src/worker.js'
   },
   output: {
-    filename: '[name].bundle.js',
+    filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist')
-  }
+  },
+  plugins: [
+    new HTMLWebpackPlugin({
+      template: './public/index.html'
+    })
+  ]
 }
