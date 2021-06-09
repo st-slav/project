@@ -1,5 +1,5 @@
 
-import { test } from "./test"
+import { test } from "@utils/test"
 // import json from './json' // работает по умолчанию
 // import logo from './logo.png
 // import xml from './xml.xml
