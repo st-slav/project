@@ -16,3 +16,4 @@ class Paper {
 }
 
 console.log(new Paper(12).test())
+console.log(window.process)

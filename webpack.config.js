@@ -1,7 +1,31 @@
 const path = require('path')
+const webpack = require('webpack')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const MimiCssExtractPlugin = require('mini-css-extract-plugin')
+const dotenv = require('dotenv').config({
+  path: path.join(__dirname, '.env')
+})
+const OptimazeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const TerserWebpackPlugin = require('terser-webpack-plugin')
+
+const isDev = process.env.NODE_ENV
+
+const optimization = () => {
+  const config = {
+    splitChunks: {
+      chunks: 'all'
+    }
+  }
+  if(!isDev) {
+    config.minimizer = [
+      new OptimazeCssAssetsPlugin(),
+      new TerserWebpackPlugin()
+    ]
+  }
+  return config
+}
 
 module.exports = {
   context: path.resolve(__dirname),
@@ -19,17 +43,16 @@ module.exports = {
       '@utils': path.resolve(__dirname, 'src/utils')
     }
   },
-  optimization: {
-    splitChunks: {
-      chunks: 'all'
-    }
-  },
+  optimization: optimization(),
   devServer: {
     port: 3333
   },
   plugins: [
     new HTMLWebpackPlugin({
-      template: './public/index.html'
+      template: './public/index.html',
+      minify: {
+        collapseWhitespace: !isDev
+      }
     }),
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin({
@@ -37,13 +60,19 @@ module.exports = {
         from: path.resolve(__dirname, './public/icons/icon.png'),
         to: path.resolve(__dirname, 'dist')
       }]
-    })
+    }),
+    new MimiCssExtractPlugin({
+      filename: '[name].[contenthash].css'
+    }),
+    new webpack.DefinePlugin({
+      "process.env": dotenv.parsed
+    }),
   ],
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: [MimiCssExtractPlugin.loader, 'css-loader']
       },
       {
         test: /\.(png|jpg|svg|gif)$/,
