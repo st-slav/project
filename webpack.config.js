@@ -1,6 +1,7 @@
 const path = require('path')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   context: path.resolve(__dirname),
@@ -30,7 +31,13 @@ module.exports = {
     new HTMLWebpackPlugin({
       template: './public/index.html'
     }),
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    new CopyWebpackPlugin({
+      patterns: [{
+        from: path.resolve(__dirname, './public/icons/icon.png'),
+        to: path.resolve(__dirname, 'dist')
+      }]
+    })
   ],
   module: {
     rules: [
